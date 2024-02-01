@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-02-01T22:37:07.859Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="Y-ALd1cVcd5qSSv1lbW8" version="23.1.1" type="device">
+<mxfile host="app.diagrams.net" modified="2024-02-01T22:39:03.360Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="pdbJ0OBVMa1wAZzmx9ce" version="23.1.1" type="device">
   <diagram name="Page-1" id="pHibKQ7fRZJHNlxyuRbs">
-    <mxGraphModel dx="3667" dy="2672" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1815" dy="1692" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -48,6 +48,9 @@
         </mxCell>
         <mxCell id="wijOLSvZJY9tGJD3XLYM-33" value="AWS Fargate" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.fargate;" vertex="1" parent="wijOLSvZJY9tGJD3XLYM-31">
           <mxGeometry y="140" width="70" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="wijOLSvZJY9tGJD3XLYM-147" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="wijOLSvZJY9tGJD3XLYM-9" source="wijOLSvZJY9tGJD3XLYM-22" target="wijOLSvZJY9tGJD3XLYM-32">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="wijOLSvZJY9tGJD3XLYM-22" value="Amazon&#xa;Aurora" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.aurora;" vertex="1" parent="wijOLSvZJY9tGJD3XLYM-9">
           <mxGeometry x="295.35" width="80" height="110" as="geometry" />
@@ -114,12 +117,6 @@
         </mxCell>
         <mxCell id="wijOLSvZJY9tGJD3XLYM-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wijOLSvZJY9tGJD3XLYM-11" target="wijOLSvZJY9tGJD3XLYM-52">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="wijOLSvZJY9tGJD3XLYM-56" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="wijOLSvZJY9tGJD3XLYM-32" target="wijOLSvZJY9tGJD3XLYM-39">
-          <mxGeometry width="100" relative="1" as="geometry">
-            <mxPoint x="1170" y="400" as="sourcePoint" />
-            <mxPoint x="1270" y="400" as="targetPoint" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="wijOLSvZJY9tGJD3XLYM-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wijOLSvZJY9tGJD3XLYM-43" target="wijOLSvZJY9tGJD3XLYM-52">
           <mxGeometry relative="1" as="geometry" />
@@ -204,6 +201,12 @@
         </mxCell>
         <mxCell id="wijOLSvZJY9tGJD3XLYM-146" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wijOLSvZJY9tGJD3XLYM-139" target="wijOLSvZJY9tGJD3XLYM-24">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wijOLSvZJY9tGJD3XLYM-148" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;elbow=vertical;startArrow=none;endFill=1;strokeColor=#545B64;rounded=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="wijOLSvZJY9tGJD3XLYM-32" target="wijOLSvZJY9tGJD3XLYM-39">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="1190" y="220" as="sourcePoint" />
+            <mxPoint x="1290" y="220" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
