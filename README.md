@@ -1,4 +1,4 @@
-# terratrawl
+# Terratrawl (Copyright ChatGPT)
 Monorepo for Terratrawl
 
 ##### Proposed high-level infrastructure diagram
