@@ -1,4 +1,4 @@
 # terratrawl
 Monorepo for Terratrawl
 
-![Architecture](../system-diagrams/high-level-infra-guide.png)
+![Architecture](https://github.com/alex-gunning/terratrawl/blob/main/system-diagrams/high-level-infra-guide.png)
