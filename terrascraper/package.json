@@ -9,7 +9,7 @@
     "start-dev": "node ./build/app.js",
     "posttest": "npm run lint"
   },
-  "author": "",
+  "author": "Alex. David",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.41.1",
