@@ -34,7 +34,13 @@ app.post('/funda', async (req: Request<FundaRequest>, res: Response)=>{
   await page.goto(fundaUrl)
 
   /*
-   * Pull the various items out of the DOM.
+   * Dismiss cookie consent popup.
+   */
+  await page.locator('button:has-text("Voorkeuren wijzigen")').click()
+  await page.locator('button:has-text("Alles weigeren")').last().click()
+
+  /*
+   * Pull the various head items out of the DOM.
    */
   const isToHire: boolean = new URL(fundaUrl).pathname.split('/')[1] === 'huur';
   const streetAddress = await page.$eval('.object-header__container .object-header__title', title => { return title.innerHTML })
@@ -52,6 +58,12 @@ app.post('/funda', async (req: Request<FundaRequest>, res: Response)=>{
   const primaryPrice = await page.$$eval('.object-header__price', price => { return price[0]?.textContent?.replace(/\D/g, '') });
   const secondaryPrice = await page.$$eval('.object-header__secondary-price', price => { return price[0]?.textContent?.replace(/\D/g, '') });
 
+  // Open the description, if there is one
+  const readMore = page .locator('button.object-description-open-button')
+  if(await readMore.count() > 0) await readMore.click()
+
+  const description = await page.$$eval('div[data-object-description-body]', desc => { return desc[0]?.textContent })
+
   await browser.close()
 
   const result = {
@@ -62,6 +74,7 @@ app.post('/funda', async (req: Request<FundaRequest>, res: Response)=>{
     isToHire,
     primaryPrice,
     secondaryPrice,
+    description,
   }
 
   res.status(200).send(result);
