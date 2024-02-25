@@ -1,5 +1,5 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
-import playwright from 'playwright';
+import playwright, { Page } from 'playwright';
 import { extractError, logger } from './logger';
 
 const app: Express = express();
@@ -23,6 +23,12 @@ app.use(express.json());
 *      -d '{ "url": "https://www.funda.nl/koop/nieuw-vennep/appartement-43464176-habanera-89/" }' \
 *      http://localhost:3000/funda
 *********************************************************************************************************/
+const furnishingTranslation = {
+  gestoffeerd: 'Upholstered',
+  gemeubileerd: 'Furnished',
+  kaal: 'Unupholstered',
+}
+
 app.post('/funda', async (req: Request<FundaRequest>, res: Response)=>{
   const fundaUrl = req.body.url
 
@@ -43,8 +49,8 @@ app.post('/funda', async (req: Request<FundaRequest>, res: Response)=>{
    * Pull the various head items out of the DOM.
    */
   const isToHire: boolean = new URL(fundaUrl).pathname.split('/')[1] === 'huur';
-  const streetAddress = await page.$eval('.object-header__container .object-header__title', title => { return title.innerHTML })
-  const postalCode = await page.$eval('.object-header__container .object-header__subtitle', code => { return code.textContent?.split('\n')[0] })
+  const streetAddress = await extractText(page, '.object-header__container .object-header__title', title => { return title.map(t => t.innerHTML) })
+  const postalCode = (await page.$$eval('.object-header__container .object-header__subtitle', code => { return code.map(t => t.textContent?.split('\n')[0]) }))[0]
 
   const bedrooms = await page.getByRole('listitem')
     .filter({ hasText: 'slaapkamers' })
@@ -55,14 +61,18 @@ app.post('/funda', async (req: Request<FundaRequest>, res: Response)=>{
     .allTextContents()
     .then(rawData => rawData[0].replace(/\D/g, ''))
 
-  const primaryPrice = await page.$$eval('.object-header__price', price => { return price[0]?.textContent?.replace(/\D/g, '') });
-  const secondaryPrice = await page.$$eval('.object-header__secondary-price', price => { return price[0]?.textContent?.replace(/\D/g, '') });
+  const primaryPrice = await extractText(page, '.object-header__price', price => { return price.map(t => t.textContent!.replace(/\D/g, '')) })
+  const secondaryPrice = await extractText(page, '.object-header__secondary-price', price => { return price.map(t => t.textContent!.replace(/\D/g, '')) })
 
   // Open the description, if there is one
-  const readMore = page .locator('button.object-description-open-button')
+  const readMore = page.locator('button.object-description-open-button')
   if(await readMore.count() > 0) await readMore.click()
 
-  const description = await page.$$eval('div[data-object-description-body]', desc => { return desc[0]?.textContent })
+  const description = await extractText(page, 'div[data-object-description-body]')
+  const available = (await extractText(page, 'dl.object-kenmerken-list > dt:text("status") + dd')) === 'beschikbaar' ? true : false
+  const builtIn = (await extractText(page, 'dl.object-kenmerken-list > dt:text("Bouwperiode") + dd'))
+  const furnishingText = (await extractText(page, 'dl.object-kenmerken-list > dt:text("Specifiek") + dd')).toLowerCase()
+
 
   await browser.close()
 
@@ -75,10 +85,19 @@ app.post('/funda', async (req: Request<FundaRequest>, res: Response)=>{
     primaryPrice,
     secondaryPrice,
     description,
+    available,
+    builtIn,
+    furnishings: furnishingText,
   }
 
   res.status(200).send(result);
 });
+
+const textContentMappingFn = (elements: Element[]) => elements.map(element => element.textContent!.replace(/(\r\n|\n|\r)/gm, "").trim())
+const extractText = async (page: Page, selector: string, mappingFn: (elements: Element[]) => string[] = textContentMappingFn) => {
+  const item = (await page.$$eval(selector, mappingFn))[0]
+  return item ? item : ''
+}
 
 
 app.use((error: Error, req: Request<string>, res: Response, _: NextFunction) => {
